@@ -1,0 +1,321 @@
+/* style.css */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0; 
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    background-color: #000; 
+    color: #e0e0e0; 
+}
+#scene-container {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
+    z-index: 0;
+}
+.overlay-content {
+    position: relative; 
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    padding: 1rem; 
+}
+.overlay-content > * {
+    pointer-events: auto; 
+}
+.title-glow {
+    font-family: 'Aldrich', sans-serif; 
+    color: #00ffff; 
+    text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #00ffff, 0 0 32px #00b8b8; 
+    min-height: 1.2em; 
+    cursor: pointer; 
+    transition: text-shadow 0.3s ease;
+    position: relative; /* Needed for glitch pseudo-elements */
+}
+.title-glow:hover {
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #ff00ff, 0 0 40px #ff00ff; 
+}
+
+/* Glitch Effect Styles */
+.glitch-active {
+    /* animation: glitch-main 2.5s infinite steps(1); */ 
+}
+
+.glitch-active > span::before,
+.glitch-active > span::after {
+    content: attr(data-text); 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000; 
+    overflow: hidden;
+}
+
+.glitch-active > span::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00ff; 
+    animation: glitch-before 1.5s infinite linear alternate-reverse; 
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+.glitch-active > span::after {
+    left: -2px;
+    text-shadow: -2px 0 #00ff00, 2px 2px #ff00ff; 
+    animation: glitch-after 1.5s infinite linear alternate-reverse;  
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-before {
+    0% { clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%); transform: translateY(-2px); }
+    10% { clip-path: polygon(0 25%, 100% 25%, 100% 55%, 0 55%); transform: translateY(1px); }
+    20% { clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); transform: translateY(-1px); }
+    100% { clip-path: polygon(0 50%, 100% 50%, 100% 70%, 0 70%); transform: translateY(0); }
+}
+
+@keyframes glitch-after {
+    0% { clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%); transform: translateY(1px); }
+    10% { clip-path: polygon(0 40%, 100% 40%, 100% 70%, 0 70%); transform: translateY(-2px); }
+    100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translateY(0); } 
+}
+
+
+.intro-text {
+    font-family: 'Courier New', Courier, monospace;
+    color: #00ffaa; 
+    text-shadow: 0 0 5px #00ffaa;
+    font-size: 1rem; 
+    text-align: center;
+    margin-top: 0.5rem; 
+    margin-bottom: 1.5rem; 
+    min-height: 1.5em; 
+    line-height: 1.4;
+    white-space: pre-wrap; 
+    transition: opacity 0.7s ease-out; 
+}
+.intro-text.fading-out {
+    opacity: 0;
+}
+
+
+.cyber-button {
+    background-color: rgba(0, 255, 255, 0.1); 
+    color: #00ffff; 
+    border: 1px solid #00ffff; 
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem; 
+    font-weight: 500; 
+    text-transform: uppercase;
+    letter-spacing: 0.075em; 
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.2); 
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace; 
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center; 
+    min-height: 2.75rem; 
+    margin-bottom: 0.5rem; 
+}
+
+.cyber-button:hover {
+    background-color: rgba(0, 255, 255, 0.2); 
+    color: #fff;
+    border-color: #ff00ff; 
+    box-shadow: 0 0 15px #00ffff, 0 0 25px rgba(0, 255, 255, 0.4), 0 0 8px #ff00ff; 
+}
+
+.cyber-button:active {
+    transform: translateY(1px) scale(0.98);
+    background-color: rgba(0, 255, 255, 0.3);
+}
+
+.cyber-button:disabled {
+    background-color: rgba(0, 120, 120, 0.2); 
+    color: #007777;
+    border-color: #007777;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.blinking-cursor {
+    display: inline-block;
+    width: 8px; 
+    height: 1.2em; 
+    background-color: #00ffff; 
+    animation: blink 1s step-end infinite;
+    margin-left: 0.3em; 
+    box-shadow: 0 0 3px #00ffff;
+}
+ .blinking-cursor.hidden-cursor { 
+    visibility: hidden;
+}
+
+
+@keyframes blink {
+    from, to { background-color: transparent; box-shadow: none; }
+    50% { background-color: #00ffff; box-shadow: 0 0 3px #00ffff; }
+}
+
+.button-text-prefix { 
+    margin-right: 0.1em;
+}
+.button-container { 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 0.5rem; 
+    margin-bottom: 1rem; 
+}
+
+.cyber-input {
+    background-color: rgba(10, 25, 47, 0.8); 
+    border: 1px solid #00ffff;
+    color: #00ffff;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem; 
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    font-family: 'Courier New', Courier, monospace;
+}
+.cyber-input:focus {
+    outline: none;
+    border-color: #ff00ff; 
+    box-shadow: 0 0 12px rgba(255, 0, 255, 0.5);
+}
+.cyber-input::placeholder {
+    color: rgba(0, 255, 255, 0.5);
+}
+.response-area {
+    background-color: rgba(10, 20, 35, 0.7);
+    border: 1px solid #007777; 
+    color: #c0f0f0; 
+    padding: 1rem;
+    border-radius: 0.375rem;
+    margin-top: 1rem;
+    min-height: 100px;
+    overflow-y: auto;
+    max-height: 70vh; 
+    box-shadow: inset 0 0 10px rgba(0, 120, 120, 0.3);
+    font-family: 'Courier New', Courier, monospace;
+    text-align: left; 
+}
+.response-area h2 {
+    color: #00ffff;
+    font-size: 1.25em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    text-shadow: 0 0 3px #00ffff;
+    font-family: 'Aldrich', sans-serif; 
+}
+.response-area h3 {
+    color: #00dddd;
+    font-size: 1.1em;
+    margin-top: 0.8em;
+    margin-bottom: 0.4em;
+    text-shadow: 0 0 2px #00dddd;
+    font-family: 'Aldrich', sans-serif; 
+}
+.response-area ul {
+    list-style-type: none; 
+    padding-left: 1em;
+    margin-bottom: 0.7em;
+}
+.response-area li {
+    margin-bottom: 0.3em;
+    padding-left: 1.2em;
+    position: relative;
+}
+.response-area li::before { 
+    content: '>'; 
+    position: absolute;
+    left: 0;
+    color: #00ffff;
+}
+.response-area p {
+    margin-bottom: 0.7em;
+    line-height: 1.5;
+    white-space: pre-wrap; 
+}
+.response-area strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+.response-area em { 
+    color: #ff00ff; 
+    font-style: normal; 
+}
+.response-area a {
+    color: #00ffaa;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+.response-area a:hover {
+    color: #ff00ff;
+}
+.response-area pre {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid #007777;
+    padding: 0.75em;
+    border-radius: 0.25rem;
+    overflow-x: auto; 
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    font-size: 0.9em;
+    white-space: pre; 
+}
+.response-area code { 
+    font-family: 'Courier New', Courier, monospace;
+    color: #c0f0f0;
+    background-color: rgba(0,20,30,0.5); 
+    padding: 0.1em 0.3em;
+    border-radius: 0.2em;
+}
+.response-area pre code { 
+     padding: 0;
+     background-color: transparent;
+}
+.response-area hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 255, 255, 0), rgba(0, 255, 255, 0.75), rgba(0, 255, 255, 0));
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.loading-message {
+    color: #ff00ff; 
+    text-shadow: 0 0 5px #ff00ff;
+    font-family: 'Courier New', Courier, monospace;
+}
+/* Mute Button Icon Styles */
+#mute-button {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: rgba(0, 255, 255, 0.2);
+    color: #00ffff; /* SVG will inherit this */
+    border: 1px solid #00ffff;
+    padding: 0.5rem; /* Adjusted for icon */
+    width: 2.5rem; /* Make it squarish */
+    height: 2.5rem;
+    border-radius: 0.375rem; /* rounded-md */
+    cursor: pointer;
+    z-index: 100; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+#mute-button:hover {
+    background-color: rgba(0, 255, 255, 0.4);
+    color: #ffffff;
+    box-shadow: 0 0 8px #00ffff;
+}
+#mute-button svg {
+    width: 1.5rem; /* 24px */
+    height: 1.5rem; /* 24px */
+}
