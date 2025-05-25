@@ -593,6 +593,5 @@ try {
 } catch (error) {
     console.error("Error initializing Three.js scene:", error);
 }
-    </script>
-</body>
-</html>
+    
+
