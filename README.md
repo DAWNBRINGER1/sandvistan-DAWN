@@ -1,3 +1,5 @@
+![SANDEVISTAN Logo](./assets/SANDEVISTAN.png) 
+
 ## > INITIALIZING DATALINK... CONNECTION ESTABLISHED.
 
 Welcome, operative. You've jacked into **SANDEVISTAN**, an experimental AI construct designed to navigate the sprawling datascape of cyberpunk lore, ethical hacking protocols, and the ever-evolving frontier of Web3. This isn't just a repository; it's an interface to a digital mentor, a guide through the neon-drenched alleys of the net.
